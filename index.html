@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GREENCRAFT – Architekt Krajobrazu Szczecin | Natalia Swebodzińska</title>
+  <meta name="description" content="GREENCRAFT – profesjonalne projektowanie ogrodów i terenów zieleni w Szczecinie i okolicach. Natalia Swebodzińska, architekt krajobrazu." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'gc-green':    '#2D4A2D',
+            'gc-green-lt': '#3D6B3D',
+            'gc-green-xs': '#E8F0E8',
+            'gc-beige':    '#F4F0E8',
+            'gc-sand':     '#DDD5C0',
+            'gc-coal':     '#232320',
+            'gc-anthracite':'#3A3A36',
+          },
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'Georgia', 'serif'],
+            sans:  ['DM Sans', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ===== BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: #232320; background: #fff; overflow-x: hidden; }
+
+    /* ===== NAV ===== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background .4s, box-shadow .4s, backdrop-filter .4s;
+    }
+    #navbar.scrolled {
+      background: rgba(255,255,255,0.97);
+      box-shadow: 0 1px 0 rgba(0,0,0,.08);
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.55rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      /* Always white on hero, switches to green after scroll via class */
+    }
+    #navbar.scrolled .nav-logo { color: #2D4A2D !important; }
+    #navbar.scrolled .nav-link { color: #232320 !important; }
+    #navbar.scrolled .nav-link:hover { color: #2D4A2D !important; }
+    #navbar.scrolled .nav-cta {
+      background: #2D4A2D !important;
+      color: #fff !important;
+    }
+    .nav-link {
+      font-size: .8rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-cta {
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      border: 1.5px solid rgba(255,255,255,.7);
+      transition: all .25s;
+      padding: .45rem 1.1rem;
+    }
+    #navbar.scrolled .nav-cta { border-color: #2D4A2D !important; }
+    .nav-cta:hover { opacity: .8; }
+
+    /* Mobile menu */
+    #mobile-menu {
+      display: none;
+      position: fixed; top: 64px; left: 0; right: 0;
+      background: rgba(255,255,255,.98);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #E8F0E8;
+      z-index: 99;
+    }
+    #mobile-menu.open { display: block; }
+    #mobile-menu a {
+      display: block; padding: .9rem 2rem;
+      font-size: .82rem; letter-spacing: .1em;
+      text-transform: uppercase; font-weight: 500;
+      color: #232320; border-bottom: 1px solid #f0f0ec;
+      transition: color .2s, background .2s;
+    }
+    #mobile-menu a:hover { color: #2D4A2D; background: #f7f7f4; }
+
+    /* ===== HERO ===== */
+    .hero-section {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #1a2f1a 0%, #2D4A2D 50%, #1e3820 100%);
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(61,107,61,.35) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(45,74,45,.4) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: .8;
+    }
+    .hero-line {
+      position: absolute; left: 8%; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(255,255,255,.15) 30%, rgba(255,255,255,.15) 70%, transparent);
+    }
+    .hero-circle {
+      position: absolute; right: -180px; bottom: -180px;
+      width: 600px; height: 600px;
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 50%;
+    }
+    .hero-circle2 {
+      position: absolute; right: -80px; bottom: -80px;
+      width: 400px; height: 400px;
+      border: 1px solid rgba(255,255,255,.05);
+      border-radius: 50%;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(255,255,255,.6); font-weight: 400;
+      border-left: 2px solid #8BC34A;
+      padding-left: .75rem; margin-bottom: 1.5rem;
+    }
+    .hero-h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 300; line-height: 1.1;
+      color: #fff;
+    }
+    .hero-h1 em { font-style: italic; color: #a8c98a; }
+    .hero-sub {
+      font-size: .95rem; line-height: 1.7;
+      color: rgba(255,255,255,.65); font-weight: 300; max-width: 420px;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: #fff; color: #2D4A2D;
+      font-size: .78rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      padding: .85rem 2rem;
+      transition: all .3s;
+    }
+    .btn-primary:hover { background: #a8c98a; color: #1a2f1a; }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: .6rem;
+      border: 1.5px solid rgba(255,255,255,.4); color: rgba(255,255,255,.85);
+      font-size: .78rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      padding: .85rem 2rem;
+      transition: all .3s;
+    }
+    .btn-outline:hover { border-color: #fff; color: #fff; }
+    .hero-stat { text-align: center; }
+    .hero-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.8rem; font-weight: 300; color: #fff; line-height: 1;
+    }
+    .hero-stat-num span { color: #a8c98a; }
+    .hero-stat-label {
+      font-size: .72rem; letter-spacing: .12em; text-transform: uppercase;
+      color: rgba(255,255,255,.5); font-weight: 400; margin-top: .3rem;
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-tag {
+      font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+      font-weight: 500; color: #3D6B3D;
+      border-left: 2px solid #3D6B3D; padding-left: .65rem;
+      display: inline-block; margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300; line-height: 1.15; color: #232320;
+    }
+    .section-title em { font-style: italic; color: #2D4A2D; }
+
+    /* ===== ABOUT ===== */
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-placeholder {
+      width: 100%; aspect-ratio: 3/4;
+      background: linear-gradient(135deg, #2D4A2D, #3D6B3D);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .about-badge {
+      position: absolute; bottom: -24px; right: -24px;
+      background: #fff; border: 1px solid #E8F0E8;
+      padding: 1.2rem 1.5rem; text-align: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,.08);
+    }
+    .about-badge-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.5rem; font-weight: 300; color: #2D4A2D; line-height: 1;
+    }
+    .about-badge-txt {
+      font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+      color: #7a7a70; font-weight: 500;
+    }
+    .about-feature {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1.2rem 0; border-bottom: 1px solid #f0f0ec;
+    }
+    .about-feature:last-child { border-bottom: none; }
+    .about-icon-wrap {
+      flex-shrink: 0; width: 40px; height: 40px;
+      background: #E8F0E8; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ===== SERVICES ===== */
+    .services-section { background: #F4F0E8; }
+    .service-card {
+      background: #fff;
+      padding: 2rem 1.75rem;
+      border-bottom: 3px solid transparent;
+      transition: border-color .3s, transform .3s, box-shadow .3s;
+      cursor: default;
+    }
+    .service-card:hover {
+      border-bottom-color: #2D4A2D;
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(45,74,45,.1);
+    }
+    .service-icon {
+      width: 48px; height: 48px;
+      background: #E8F0E8; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
+      transition: background .3s;
+    }
+    .service-card:hover .service-icon { background: #2D4A2D; }
+    .service-card:hover .service-icon svg { stroke: #fff; }
+    .service-icon svg { width: 22px; height: 22px; stroke: #2D4A2D; transition: stroke .3s; }
+    .service-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem; font-weight: 500; color: #232320; margin-bottom: .5rem;
+    }
+    .service-desc { font-size: .83rem; color: #6a6a60; line-height: 1.65; }
+
+    /* ===== VIZ BANNER ===== */
+    .viz-banner {
+      background: linear-gradient(135deg, #2D4A2D 0%, #1a2f1a 100%);
+      position: relative; overflow: hidden;
+    }
+    .viz-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* ===== PORTFOLIO ===== */
+    .portfolio-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+    .portfolio-item {
+      overflow: hidden; position: relative; cursor: pointer;
+      background: #2D4A2D;
+    }
+    .portfolio-item:nth-child(1) { grid-column: span 8; grid-row: span 2; }
+    .portfolio-item:nth-child(2) { grid-column: span 4; }
+    .portfolio-item:nth-child(3) { grid-column: span 4; }
+    .portfolio-item:nth-child(4) { grid-column: span 4; }
+    .portfolio-item:nth-child(5) { grid-column: span 4; }
+    .portfolio-item:nth-child(6) { grid-column: span 4; }
+    .portfolio-ph {
+      width: 100%; height: 100%; min-height: 200px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .9rem; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(255,255,255,.3); font-weight: 300;
+      transition: transform .6s ease;
+    }
+    .portfolio-item:hover .portfolio-ph { transform: scale(1.04); }
+    .portfolio-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,47,26,.9) 0%, transparent 60%);
+      opacity: 0; transition: opacity .4s;
+      display: flex; align-items: flex-end; padding: 1.5rem;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem; font-weight: 400; color: #fff;
+    }
+    .portfolio-sub { font-size: .72rem; color: rgba(255,255,255,.6); letter-spacing: .1em; text-transform: uppercase; }
+
+    /* Portfolio colors */
+    .portfolio-item:nth-child(1) { background: linear-gradient(135deg, #1e3820,#2D4A2D); }
+    .portfolio-item:nth-child(2) { background: linear-gradient(135deg, #2a4020,#3a5a30); }
+    .portfolio-item:nth-child(3) { background: linear-gradient(135deg, #1a3025,#2D4A2D); }
+    .portfolio-item:nth-child(4) { background: linear-gradient(135deg, #232820,#354530); }
+    .portfolio-item:nth-child(5) { background: linear-gradient(135deg, #1e3820,#2a4830); }
+    .portfolio-item:nth-child(6) { background: linear-gradient(135deg, #283020,#3D5A2D); }
+
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+      .portfolio-item:nth-child(1) { grid-column: span 2; grid-row: span 1; }
+      .portfolio-item:nth-child(n) { grid-column: span 1; }
+      .portfolio-item:nth-child(1) { grid-column: span 2; }
+    }
+
+    /* ===== CONTACT ===== */
+    .contact-section { background: #F4F0E8; }
+    .form-field {
+      width: 100%; background: #fff;
+      border: 1px solid #E8E4DC; padding: .9rem 1rem;
+      font-family: 'DM Sans', sans-serif; font-size: .88rem;
+      color: #232320; outline: none;
+      transition: border-color .25s;
+    }
+    .form-field:focus { border-color: #2D4A2D; }
+    .form-field::placeholder { color: #aaa8a0; }
+    .form-label {
+      display: block; font-size: .7rem; letter-spacing: .12em;
+      text-transform: uppercase; font-weight: 500; color: #6a6a60; margin-bottom: .4rem;
+    }
+    .btn-green {
+      background: #2D4A2D; color: #fff;
+      font-size: .78rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase;
+      padding: .95rem 2.5rem; border: none; cursor: pointer;
+      transition: background .25s;
+    }
+    .btn-green:hover { background: #1a2f1a; }
+    .contact-info-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 0; border-bottom: 1px solid #e8e4dc;
+    }
+    .contact-info-item:last-child { border-bottom: none; }
+    .contact-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      background: #2D4A2D; display: flex; align-items: center; justify-content: center;
+    }
+    .contact-icon svg { width: 16px; height: 16px; stroke: #fff; }
+    .social-link {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .7rem 1rem;
+      background: #fff; border: 1px solid #e8e4dc;
+      font-size: .78rem; font-weight: 500; letter-spacing: .08em;
+      color: #232320; text-decoration: none;
+      transition: all .25s;
+    }
+    .social-link:hover { background: #2D4A2D; color: #fff; border-color: #2D4A2D; }
+    .social-link svg { width: 16px; height: 16px; }
+
+    /* ===== MAP ===== */
+    .map-wrap { width: 100%; height: 320px; }
+    .map-wrap iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+    /* ===== FOOTER ===== */
+    footer { background: #232320; }
+
+    /* ===== FADE-IN ===== */
+    .fade-in { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ===== SCROLL LINE ===== */
+    #progress-bar {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: #3D6B3D; z-index: 200; width: 0%;
+      transition: width .1s linear;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav id="navbar" class="px-6 md:px-12 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="#hero" class="nav-logo" style="color:#fff;">GREENCRAFT</a>
+    <!-- Desktop links -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#o-mnie"   class="nav-link" style="color:rgba(255,255,255,.8);">O mnie</a>
+      <a href="#uslugi"   class="nav-link" style="color:rgba(255,255,255,.8);">Usługi</a>
+      <a href="#portfolio" class="nav-link" style="color:rgba(255,255,255,.8);">Portfolio</a>
+      <a href="#kontakt"  class="nav-link" style="color:rgba(255,255,255,.8);">Kontakt</a>
+      <a href="#kontakt"  class="nav-cta" style="color:#fff;">Darmowa wycena</a>
+    </div>
+    <!-- Mobile hamburger -->
+    <button id="hamburger" class="md:hidden flex flex-col gap-1.5" aria-label="Menu">
+      <span class="ham-line block w-6 h-px bg-white transition-all"></span>
+      <span class="ham-line block w-6 h-px bg-white transition-all"></span>
+      <span class="ham-line block w-6 h-px bg-white transition-all"></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div id="mobile-menu">
+  <a href="#o-mnie"    onclick="closeMobile()">O mnie</a>
+  <a href="#uslugi"    onclick="closeMobile()">Usługi</a>
+  <a href="#portfolio" onclick="closeMobile()">Portfolio</a>
+  <a href="#kontakt"   onclick="closeMobile()">Kontakt</a>
+  <a href="#kontakt"   onclick="closeMobile()" style="color:#2D4A2D;font-weight:600;">Darmowa wycena</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" class="hero-section">
+  <div class="hero-pattern"></div>
+  <div class="hero-line"></div>
+  <div class="hero-circle"></div>
+  <div class="hero-circle2"></div>
+
+  <div class="max-w-7xl mx-auto px-6 md:px-12 w-full pt-24 pb-16">
+    <div class="grid md:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="hero-tag">Architekt krajobrazu · Szczecin i okolice</div>
+        <h1 class="hero-h1 mb-6">
+          Tworzę ogrody,<br/>które opowiadają<br/><em>Twoją historię</em>
+        </h1>
+        <p class="hero-sub mb-10">
+          Projekty dopracowane w każdym szczególe – od pierwszego szkicu po gotowy ogród.
+          Łączę wrażliwość estetyczną z praktyczną wiedzą wykonawczą.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <a href="#kontakt" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81a19.79 19.79 0 01-3.07-8.59A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Darmowa wycena
+          </a>
+          <a href="#portfolio" class="btn-outline">
+            Zobacz moje projekty
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="hidden md:flex flex-col items-end gap-6">
+        <div class="flex gap-8">
+          <div class="hero-stat">
+            <div class="hero-stat-num">100<span>+</span></div>
+            <div class="hero-stat-label">Zrealizowanych projektów</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">10<span>+</span></div>
+            <div class="hero-stat-label">Lat doświadczenia</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">3D</div>
+            <div class="hero-stat-label">Wizualizacje</div>
+          </div>
+        </div>
+        <!-- Decorative plant SVG -->
+        <div style="opacity:.15;">
+          <svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M110 200 Q110 120 160 80 Q110 100 110 200Z" fill="#a8c98a"/>
+            <path d="M110 200 Q110 120 60 80 Q110 100 110 200Z" fill="#8bc34a"/>
+            <path d="M110 200 Q80 140 40 130 Q90 150 110 200Z" fill="#a8c98a" opacity=".7"/>
+            <path d="M110 200 Q140 140 180 130 Q130 150 110 200Z" fill="#8bc34a" opacity=".7"/>
+            <line x1="110" y1="200" x2="110" y2="80" stroke="#a8c98a" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+    <span style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);">Odkryj</span>
+    <div style="width:1px;height:40px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);"></div>
+  </div>
+</section>
+
+<!-- O MNIE -->
+<section id="o-mnie" class="py-24 md:py-32">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="grid md:grid-cols-2 gap-16 md:gap-24 items-start">
+      <!-- Image -->
+      <div class="about-img-wrap fade-in">
+        <div class="about-img-placeholder">
+          <!-- Replace this div with your <img> tag -->
+          <div style="text-align:center;padding:2rem;">
+            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:.3;">
+              <circle cx="40" cy="30" r="16" stroke="white" stroke-width="1.5"/>
+              <path d="M10 75 Q40 55 70 75" stroke="white" stroke-width="1.5" fill="none"/>
+            </svg>
+            <p style="color:rgba(255,255,255,.3);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;margin-top:1rem;">Twoje zdjęcie</p>
+          </div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-num">100+</div>
+          <div class="about-badge-txt">Projektów</div>
+        </div>
+      </div>
+      <!-- Text -->
+      <div class="fade-in" style="transition-delay:.15s;">
+        <div class="section-tag">O mnie</div>
+        <h2 class="section-title mb-6">Natalia Swebodzińska<br/><em>GREENCRAFT</em></h2>
+        <p class="text-gc-anthracite leading-relaxed mb-5" style="font-size:.93rem;">
+          Jestem architektem krajobrazu z wieloletnim doświadczeniem w projektowaniu, wykonawstwie i pielęgnacji terenów zieleni. Działam na terenie <strong>Szczecina i okolic</strong>, łącząc pasję do natury z precyzją w każdym szczególe realizacji.
+        </p>
+        <p class="text-gc-anthracite leading-relaxed mb-5" style="font-size:.93rem;">
+          Moje projekty wyróżnia to, że znam ogrodnictwo od podszewki – nie tylko rysuję plany, ale rozumiem, jak każdy element zachowuje się w terenie. Dzięki temu tworzę przestrzenie, które są nie tylko efektowne wizualnie, ale przede wszystkim <em>dopracowane w każdym szczególe wykonawczym</em>.
+        </p>
+        <p class="text-gc-anthracite leading-relaxed mb-8" style="font-size:.93rem;">
+          Współpracuję ze sprawdzonymi firmami wykonawczymi i <strong>sprawuję nadzór wykonawczy</strong> nad każdą realizacją – masz gwarancję, że projekt, który zaakceptujesz, zostanie wykonany dokładnie tak, jak zaplanowałam. Jesteś w dobrych rękach od pierwszego szkicu po ukończony ogród.
+        </p>
+
+        <div class="space-y-0 mb-8">
+          <div class="about-feature">
+            <div class="about-icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D4A2D" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <div>
+              <p class="font-medium text-sm mb-1" style="color:#232320;">Projekt + nadzór wykonawczy</p>
+              <p class="text-xs leading-relaxed" style="color:#7a7a70;">Projektuję i pilnuję realizacji we współpracy z zaufanymi wykonawcami.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D4A2D" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <div>
+              <p class="font-medium text-sm mb-1" style="color:#232320;">Fotorealistyczne wizualizacje 3D</p>
+              <p class="text-xs leading-relaxed" style="color:#7a7a70;">Zobaczysz swój ogród w szczegółach, zanim padnie pierwsza łopata.</p>
+            </div>
+          </div>
+          <div class="about-feature">
+            <div class="about-icon-wrap">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2D4A2D" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <p class="font-medium text-sm mb-1" style="color:#232320;">Doświadczenie w pielęgnacji i wykonawstwie</p>
+              <p class="text-xs leading-relaxed" style="color:#7a7a70;">Wiem, jak rośliny rosną i jak ogród dojrzewa – projektuję z myślą o przyszłości.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="#kontakt" class="btn-green inline-block">Porozmawiajmy o Twoim ogrodzie</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIZ BANNER -->
+<div class="viz-banner py-16 relative">
+  <div class="max-w-5xl mx-auto px-6 md:px-12 text-center relative z-10">
+    <p style="font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(168,201,138,.7);margin-bottom:1rem;">Nowoczesne narzędzia projektowe</p>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;color:#fff;line-height:1.2;margin-bottom:1.2rem;">
+      Tworzę fotorealistyczne wizualizacje,<br/>które pokazują Twój ogród <em style="font-style:italic;color:#a8c98a;">przed realizacją</em>
+    </h3>
+    <p style="font-size:.88rem;color:rgba(255,255,255,.55);max-width:540px;margin:0 auto .5rem;">
+      Dzięki renderingom 3D zobaczysz każdy zakątek swojej przestrzeni – kolory, tekstury, rośliny – w zupełnie realnym świetle. Zero niespodzianek.
+    </p>
+  </div>
+</div>
+
+<!-- USŁUGI -->
+<section id="uslugi" class="services-section py-24 md:py-32">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="text-center mb-16 fade-in">
+      <div class="section-tag" style="border:none;padding:0;display:block;margin-bottom:.8rem;">Oferta</div>
+      <h2 class="section-title">Usługi, które <em>tworzę z pasją</em></h2>
+      <p style="font-size:.9rem;color:#6a6a60;max-width:480px;margin:1rem auto 0;">
+        Każdy projekt traktuję indywidualnie. Niezależnie od skali – ogród prywatny, osiedle czy dach – dostajesz pełne zaangażowanie i dopracowany efekt.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 fade-in" style="transition-delay:.1s;">
+
+      <!-- 1 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 21h18M9 21V7l3-4 3 4v14M9 12h6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="service-title">Projektowanie ogrodów</div>
+        <p class="service-desc">Ogrody prywatne tworzone z myślą o stylu życia i osobowości właściciela – od koncepcji po wykonanie.</p>
+      </div>
+
+      <!-- 2 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9" stroke-linecap="round"/><path d="M12 3C8 7 8 17 12 21M12 3c4 4 4 14 0 18M3 12h18" stroke-linecap="round"/></svg>
+        </div>
+        <div class="service-title">Zieleń miejska</div>
+        <p class="service-desc">Projektowanie przestrzeni publicznych, parków i skwerów – zielone płuca miasta tworzone z dbałością o trwałość i estetykę.</p>
+      </div>
+
+      <!-- 3 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="1"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" stroke-linecap="round"/><path d="M12 12v4m-2-2h4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="service-title">Zieleń na osiedlach</div>
+        <p class="service-desc">Kompleksowe zagospodarowanie terenów wspólnych osiedli – reprezentacyjne wejścia, place zabaw, miejsca odpoczynku.</p>
+      </div>
+
+      <!-- 4 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M4 20V8l8-5 8 5v12M9 20v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="service-title">Balkony i tarasy</div>
+        <p class="service-desc">Małe przestrzenie z wielkim potencjałem. Projektuję balkony i tarasy, które stają się zieloną oazą w centrum miasta.</p>
+      </div>
+
+      <!-- 5 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M2 12h20M2 12c4-4 8-4 12 0s8 4 8 0M2 12c4 4 8 4 12 0" stroke-linecap="round"/><path d="M12 2v4m0 16v-4" stroke-linecap="round"/></svg>
+        </div>
+        <div class="service-title">Zielone dachy</div>
+        <p class="service-desc">Projektowanie dachów ekstensywnych i intensywnych – estetyczne, ekologiczne i funkcjonalne rozwiązania dla nowoczesnych budynków.</p>
+      </div>
+
+      <!-- 6 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="service-title">Przestrzenie reprezentacyjne</div>
+        <p class="service-desc">Ogrody i strefy zielone dla instytucji i firm – wizytówka, która robi pierwsze wrażenie i buduje prestiż marki.</p>
+      </div>
+
+      <!-- 7 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="service-title">Nadzór wykonawczy</div>
+        <p class="service-desc">Sprawuję nadzór nad realizacją projektu we współpracy ze sprawdzonymi wykonawcami. Masz pewność, że projekt wychodzi tak, jak zaplanowałam.</p>
+      </div>
+
+      <!-- 8 -->
+      <div class="service-card">
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="service-title">Porady ogrodnicze</div>
+        <p class="service-desc">Fachowe konsultacje dla tych, którzy chcą zadbać o swój ogród samodzielnie – dobór roślin, pielęgnacja, planowanie nasadzeń.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" class="py-24 md:py-32">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 fade-in">
+      <div>
+        <div class="section-tag">Portfolio</div>
+        <h2 class="section-title">Przykładowe <em>projekty</em></h2>
+      </div>
+      <p style="font-size:.85rem;color:#7a7a70;max-width:320px;line-height:1.7;">
+        Poniżej znajdziesz wybrane realizacje i projekty koncepcyjne. Każda przestrzeń to osobna historia.
+      </p>
+    </div>
+
+    <div class="portfolio-grid fade-in" style="transition-delay:.1s;">
+      <div class="portfolio-item">
+        <div class="portfolio-ph" style="flex-direction:column;gap:.5rem;">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Twoje zdjęcie</span>
+        </div>
+        <div class="portfolio-overlay">
+          <div>
+            <div class="portfolio-label">Ogród prywatny, Szczecin</div>
+            <div class="portfolio-sub">Projekt + nadzór wykonawczy</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item" style="min-height:200px;">
+        <div class="portfolio-ph" style="flex-direction:column;gap:.5rem;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Twoje zdjęcie</span>
+        </div>
+        <div class="portfolio-overlay">
+          <div>
+            <div class="portfolio-label">Taras miejski</div>
+            <div class="portfolio-sub">Projekt + wizualizacja 3D</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item" style="min-height:200px;">
+        <div class="portfolio-ph" style="flex-direction:column;gap:.5rem;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Twoje zdjęcie</span>
+        </div>
+        <div class="portfolio-overlay">
+          <div>
+            <div class="portfolio-label">Osiedle mieszkaniowe</div>
+            <div class="portfolio-sub">Zagospodarowanie terenu</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item" style="min-height:200px;">
+        <div class="portfolio-ph" style="flex-direction:column;gap:.5rem;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Twoje zdjęcie</span>
+        </div>
+        <div class="portfolio-overlay">
+          <div>
+            <div class="portfolio-label">Zielony dach</div>
+            <div class="portfolio-sub">Projekt ekstensywny</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item" style="min-height:200px;">
+        <div class="portfolio-ph" style="flex-direction:column;gap:.5rem;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Twoje zdjęcie</span>
+        </div>
+        <div class="portfolio-overlay">
+          <div>
+            <div class="portfolio-label">Przestrzeń firmowa</div>
+            <div class="portfolio-sub">Projekt reprezentacyjny</div>
+          </div>
+        </div>
+      </div>
+      <div class="portfolio-item" style="min-height:200px;">
+        <div class="portfolio-ph" style="flex-direction:column;gap:.5rem;">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"><rect x="3" y="3" width="18" height="18"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Twoje zdjęcie</span>
+        </div>
+        <div class="portfolio-overlay">
+          <div>
+            <div class="portfolio-label">Ogród sensoryczny</div>
+            <div class="portfolio-sub">Zieleń miejska</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-12 fade-in">
+      <p style="font-size:.82rem;color:#9a9a90;margin-bottom:1rem;">Chcesz zobaczyć więcej realizacji? Odwiedź mój Instagram lub napisz do mnie bezpośrednio.</p>
+      <a href="#kontakt" class="btn-green inline-block">Skontaktuj się ze mną</a>
+    </div>
+  </div>
+</section>
+
+<!-- KONTAKT -->
+<section id="kontakt" class="contact-section py-24 md:py-32">
+  <div class="max-w-7xl mx-auto px-6 md:px-12">
+    <div class="text-center mb-16 fade-in">
+      <div class="section-tag">Kontakt</div>
+      <h2 class="section-title">Zacznijmy <em>razem</em></h2>
+      <p style="font-size:.9rem;color:#6a6a60;max-width:440px;margin:1rem auto 0;">
+        Napisz lub zadzwoń – pierwsza rozmowa i wycena są bezpłatne.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 md:gap-20">
+      <!-- Form -->
+      <div class="fade-in">
+        <div class="space-y-5">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="form-label">Imię i nazwisko</label>
+              <input type="text" class="form-field" placeholder="Jan Kowalski" />
+            </div>
+            <div>
+              <label class="form-label">Telefon</label>
+              <input type="tel" class="form-field" placeholder="+48 500 000 000" />
+            </div>
+          </div>
+          <div>
+            <label class="form-label">Adres e-mail</label>
+            <input type="email" class="form-field" placeholder="jan@example.com" />
+          </div>
+          <div>
+            <label class="form-label">Rodzaj projektu</label>
+            <select class="form-field" style="cursor:pointer;">
+              <option value="" disabled selected>Wybierz rodzaj usługi...</option>
+              <option>Projektowanie ogrodu</option>
+              <option>Zieleń miejska / osiedlowa</option>
+              <option>Balkon lub taras</option>
+              <option>Zielony dach</option>
+              <option>Przestrzeń reprezentacyjna</option>
+              <option>Nadzór wykonawczy</option>
+              <option>Porada ogrodnicza</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Wiadomość</label>
+            <textarea class="form-field" rows="5" placeholder="Opisz w kilku słowach swój projekt lub pytanie..."></textarea>
+          </div>
+          <div>
+            <p style="font-size:.7rem;color:#aaa8a0;margin-bottom:.8rem;">
+              Przesyłając formularz, wyrażasz zgodę na przetwarzanie danych osobowych w celu kontaktu.
+            </p>
+            <button class="btn-green w-full">Wyślij wiadomość</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Info -->
+      <div class="fade-in" style="transition-delay:.15s;">
+        <div class="mb-8">
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:#2D4A2D;margin-bottom:.3rem;">GREENCRAFT</p>
+          <p style="font-size:.82rem;color:#7a7a70;">Natalia Swebodzińska · Architekt Krajobrazu</p>
+        </div>
+
+        <div class="space-y-0 mb-8">
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.99 2.18 2 2 0 013 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            </div>
+            <div>
+              <p style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#9a9a90;margin-bottom:.2rem;">Telefon</p>
+              <p style="font-size:.9rem;color:#232320;">+48 &nbsp;·&nbsp; Uzupełnij swój numer</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <p style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#9a9a90;margin-bottom:.2rem;">E-mail</p>
+              <p style="font-size:.9rem;color:#232320;">kontakt@greencraft.pl</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <p style="font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#9a9a90;margin-bottom:.2rem;">Obszar działania</p>
+              <p style="font-size:.9rem;color:#232320;">Szczecin i okolice</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social links -->
+        <p style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#9a9a90;margin-bottom:.8rem;">Znajdź mnie online</p>
+        <div class="flex flex-col gap-2">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            Instagram – @greencraft_szczecin
+          </a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            Facebook – GREENCRAFT
+          </a>
+          <a href="https://www.oferteo.pl/" target="_blank" rel="noopener" class="social-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+            Oferteo – Opinie i wyceny
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google Maps -->
+    <div class="mt-16 fade-in">
+      <p style="font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:#9a9a90;margin-bottom:.8rem;">Obszar działania</p>
+      <div class="map-wrap" style="border:1px solid #e8e4dc;">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d150490.17!2d14.5528!3d53.4285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47aa093800d05ba5%3A0x4a70fe3a01e77d3!2sSzczecin!5e0!3m2!1spl!2spl!4v1700000000000"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Szczecin i okolice – obszar działania GREENCRAFT"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-10 px-6 md:px-12">
+  <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+    <span style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:500;letter-spacing:.18em;color:#fff;">GREENCRAFT</span>
+    <p style="font-size:.72rem;color:#6a6a60;letter-spacing:.06em;text-align:center;">
+      © 2025 GREENCRAFT · Natalia Swebodzińska · Architekt Krajobrazu · Szczecin
+    </p>
+    <p style="font-size:.72rem;color:#6a6a60;">Wszelkie prawa zastrzeżone</p>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  const progressBar = document.getElementById('progress-bar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+    // Progress bar
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = (scrollTop / docHeight) * 100;
+    progressBar.style.width = pct + '%';
+  });
+
+  // Mobile menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let menuOpen = false;
+  hamburger.addEventListener('click', () => {
+    menuOpen = !menuOpen;
+    mobileMenu.classList.toggle('open', menuOpen);
+    const lines = hamburger.querySelectorAll('.ham-line');
+    if (menuOpen) {
+      lines[0].style.transform = 'translateY(6px) rotate(45deg)';
+      lines[1].style.opacity = '0';
+      lines[2].style.transform = 'translateY(-6px) rotate(-45deg)';
+    } else {
+      lines[0].style.transform = '';
+      lines[1].style.opacity = '1';
+      lines[2].style.transform = '';
+    }
+  });
+  function closeMobile() {
+    menuOpen = false;
+    mobileMenu.classList.remove('open');
+    const lines = hamburger.querySelectorAll('.ham-line');
+    lines[0].style.transform = '';
+    lines[1].style.opacity = '1';
+    lines[2].style.transform = '';
+  }
+
+  // Fade-in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Update ham lines color on scroll (after navbar goes white)
+  window.addEventListener('scroll', () => {
+    const lines = hamburger.querySelectorAll('.ham-line');
+    if (window.scrollY > 60) {
+      lines.forEach(l => l.style.background = '#232320');
+    } else {
+      lines.forEach(l => l.style.background = '#fff');
+    }
+  });
+</script>
+</body>
+</html>
