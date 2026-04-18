@@ -722,24 +722,24 @@
     <div class="grid md:grid-cols-2 gap-12 md:gap-20">
       <!-- Form -->
       <div class="fade-in">
-        <div class="space-y-5">
+        <form action="send.php" method="POST" class="space-y-5">
           <div class="grid grid-cols-2 gap-4">
             <div>
               <label class="form-label">Imię i nazwisko</label>
-              <input type="text" class="form-field" placeholder="Jan Kowalski" />
+              <input type="text" name="name" class="form-field" placeholder="Jan Kowalski" required />
             </div>
             <div>
               <label class="form-label">Telefon</label>
-              <input type="tel" class="form-field" placeholder="+48 500 000 000" />
+              <input type="tel" name="phone" class="form-field" placeholder="+48 500 000 000" />
             </div>
           </div>
           <div>
             <label class="form-label">Adres e-mail</label>
-            <input type="email" class="form-field" placeholder="jan@example.com" />
+            <input type="email" name="email" class="form-field" placeholder="jan@example.com" required />
           </div>
           <div>
             <label class="form-label">Rodzaj projektu</label>
-            <select class="form-field" style="cursor:pointer;">
+            <select name="project" class="form-field" style="cursor:pointer;">
               <option value="" disabled selected>Wybierz rodzaj usługi...</option>
               <option>Projektowanie ogrodu</option>
               <option>Zieleń miejska / osiedlowa</option>
@@ -752,15 +752,17 @@
           </div>
           <div>
             <label class="form-label">Wiadomość</label>
-            <textarea class="form-field" rows="5" placeholder="Opisz w kilku słowach swój projekt lub pytanie..."></textarea>
+            <textarea name="message" class="form-field" rows="5" placeholder="Opisz w kilku słowach swój projekt lub pytanie..." required></textarea>
           </div>
+          <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off" />
           <div>
             <p style="font-size:.7rem;color:#aaa8a0;margin-bottom:.8rem;">
               Przesyłając formularz, wyrażasz zgodę na przetwarzanie danych osobowych w celu kontaktu.
             </p>
-            <button class="btn-green w-full">Wyślij wiadomość</button>
+            <p id="contact-status" style="display:none;font-size:.78rem;color:#2D4A2D;margin-bottom:.8rem;"></p>
+            <button type="submit" class="btn-green w-full">Wyślij wiadomość</button>
           </div>
-        </div>
+        </form>
       </div>
 
       <!-- Info -->
@@ -909,6 +911,14 @@
       lines.forEach(l => l.style.background = '#fff');
     }
   });
+
+  // Show success info after redirect from send.php.
+  const statusEl = document.getElementById('contact-status');
+  const params = new URLSearchParams(window.location.search);
+  if (statusEl && params.get('sent') === '1') {
+    statusEl.textContent = 'Dziekuje! Wiadomosc zostala wyslana.';
+    statusEl.style.display = 'block';
+  }
 
 </script>
 </body>
