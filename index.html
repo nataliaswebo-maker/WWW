@@ -367,6 +367,63 @@
       background: #3D6B3D; z-index: 200; width: 0%;
       transition: width .1s linear;
     }
+
+    /* ===== COOKIE BANNER ===== */
+    #cookie-banner {
+      position: fixed;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem;
+      z-index: 300;
+      max-width: 520px;
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid #e8e4dc;
+      box-shadow: 0 12px 40px rgba(35, 35, 32, .14);
+      padding: 1.15rem 1.25rem 1.25rem;
+      display: none;
+    }
+    #cookie-banner.visible { display: block; }
+    #cookie-banner p {
+      font-size: .82rem;
+      line-height: 1.55;
+      color: #3A3A36;
+      margin-bottom: 1rem;
+    }
+    #cookie-banner .cookie-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+    }
+    #cookie-banner .cookie-accept {
+      background: #2D4A2D;
+      color: #fff;
+      border: none;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: .55rem 1.1rem;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    #cookie-banner .cookie-accept:hover { background: #1a2f1a; }
+    #cookie-banner .cookie-close {
+      background: transparent;
+      color: #3A3A36;
+      border: 1px solid #e8e4dc;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: .55rem 1.1rem;
+      cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    #cookie-banner .cookie-close:hover {
+      border-color: #2D4A2D;
+      color: #2D4A2D;
+    }
   </style>
 </head>
 <body>
@@ -846,6 +903,18 @@
   </div>
 </footer>
 
+<!-- COOKIE BANNER -->
+<div id="cookie-banner" role="dialog" aria-live="polite" aria-label="Informacja o plikach cookies">
+  <p>
+    Ta strona wykorzystuje pliki cookies, m.in. w związku z mapą Google oraz poprawnym działaniem serwisu.
+    Korzystając ze strony, wyrażasz zgodę na ich używanie.
+  </p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-accept" id="cookie-accept">Akceptuję</button>
+    <button type="button" class="cookie-close" id="cookie-close">Zamknij</button>
+  </div>
+</div>
+
 <script>
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
@@ -919,6 +988,20 @@
     statusEl.textContent = 'Dziekuje! Wiadomosc zostala wyslana.';
     statusEl.style.display = 'block';
   }
+
+  // Cookie banner – hide after accept/close, remember in localStorage
+  const cookieBanner = document.getElementById('cookie-banner');
+  const cookieKey = 'greencraft_cookies_accepted';
+  function hideCookieBanner() {
+    if (!cookieBanner) return;
+    cookieBanner.classList.remove('visible');
+    localStorage.setItem(cookieKey, '1');
+  }
+  if (cookieBanner && !localStorage.getItem(cookieKey)) {
+    cookieBanner.classList.add('visible');
+  }
+  document.getElementById('cookie-accept')?.addEventListener('click', hideCookieBanner);
+  document.getElementById('cookie-close')?.addEventListener('click', hideCookieBanner);
 
 </script>
 </body>
